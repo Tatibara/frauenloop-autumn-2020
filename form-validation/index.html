@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation</title>
+    <style>
+      .invalid {
+        color: red;
+      }
+      .valid {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Validate your Form</h1>
+    <form>
+      <label for="username">E-Mail</label>
+      <input type="text" id="username" />
+      <br />
+      <label for="password">Password</label>
+      <input type="password" id="password" />
+      <br />
+      <h3>Password must contain the following:</h3>
+      <ul>
+        <li id="lowercase" class="invalid">A <b>lowercase</b> letter</li>
+        <li id="uppercase" class="invalid">A <b>capital (uppercase)</b> letter</li>
+        <li id="number" class="invalid">A <b>number</b></li>
+        <li id="minChars" class="invalid">Minimum <b>8 characters</b></li>
+      </ul>
+
+      <button type="submit">Submit</button>
+    </form>
+    <script>
+      const password = document.getElementById("password");
+
+      password.onkeyup = function () {
+        console.log("letter typed: ", password.value);
+
+        // regular expressions
+        const lowercaseLetterPattern = /[a-z]/;
+        const uppercaseLetterPattern = /[A-Z]/;
+        const numbersPattern = /[0-9]/;
+        // const minCharactersPattern = /.{8}/;
+
+        const lowercaseElement = document.getElementById("lowercase");
+        const uppercaseElement = document.getElementById("uppercase");
+        const numberElement = document.getElementById("number");
+        const minCharsElement = document.getElementById("minChars");
+
+        if (lowercaseLetterPattern.test(password.value)) {
+          lowercaseElement.classList.remove("invalid");
+          lowercaseElement.classList.add("valid");
+        } else {
+          lowercaseElement.classList.remove("valid");
+          lowercaseElement.classList.add("invalid");
+        }
+
+        if (uppercaseLetterPattern.test(password.value)) {
+          uppercaseElement.classList.remove("invalid");
+          uppercaseElement.classList.add("valid");
+        } else {
+          uppercaseElement.classList.remove("valid");
+          uppercaseElement.classList.add("invalid");
+        }
+
+        if (numbersPattern.test(password.value)) {
+          numberElement.classList.remove("invalid");
+          numberElement.classList.add("valid");
+        } else {
+          numberElement.classList.remove("valid");
+          numberElement.classList.add("invalid");
+        }
+
+        if (password.value.length >= 8) {
+          minCharsElement.classList.remove("invalid");
+          minCharsElement.classList.add("valid");
+        } else {
+          minCharsElement.classList.add("invalid");
+          minCharsElement.classList.remove("valid");
+        }
+      };
+    </script>
+  </body>
+</html>

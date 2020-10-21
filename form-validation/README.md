@@ -15,6 +15,8 @@ To run the project use the command `npm run server:start`.
 - create new field: Credit Card Number
 - implement validation also for credit Credit Card Number using Luhn Algorithm
 - submit button should be enable when all three fields are valid and disabled when something is incorrect
+- [React for Beginners](https://codeburst.io/react-js-for-beginners-the-basics-87ef6e54dae7)
+- [Everything You Should Know About React: The Basics You Need to Start Building](https://www.freecodecamp.org/news/everything-you-need-to-know-about-react-eaedf53238c4/)
 
 ## HomeWork #1
 

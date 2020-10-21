@@ -13,8 +13,8 @@ To run the project use the command `npm run server:start`.
 ## HomeWork #2
 
 - create new field: Credit Card Number
-- implement validation also for credit Credit Card Number
-- submit button should be enable when all three fields are valid
+- implement validation also for credit Credit Card Number using Luhn Algorithm
+- submit button should be enable when all three fields are valid and disabled when something is incorrect
 
 ## HomeWork #1
 

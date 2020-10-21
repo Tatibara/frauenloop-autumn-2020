@@ -16,12 +16,16 @@
   <body>
     <h1>Validate your Form</h1>
     <form>
-      <label for="username">E-Mail</label>
-      <input type="text" id="username" />
+      <label for="email">E-Mail</label>
+      <input type="text" id="email" />
       <br />
       <label for="password">Password</label>
       <input type="password" id="password" />
       <br />
+      <h3>E-Mail Validation must contain the following:</h3>
+      <ul>
+        <li id="emailCheck" class="invalid">Is valid</li>
+      </ul>
       <h3>Password must contain the following:</h3>
       <ul>
         <li id="lowercase" class="invalid">A <b>lowercase</b> letter</li>
@@ -30,10 +34,34 @@
         <li id="minChars" class="invalid">Minimum <b>8 characters</b></li>
       </ul>
 
-      <button type="submit">Submit</button>
+      <button type="submit" id="submitButton" >Submit</button>
     </form>
     <script>
       const password = document.getElementById("password");
+      const email = document.getElementById("email");
+      const submitButton = document.getElementById("submitButton");
+
+      let isSubmitButtonDisabled = true;
+      
+      submitButton.disabled = isSubmitButtonDisabled;
+      
+      email.onkeyup = function () {
+        const emailPattern =  /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        const emailCheckElement = document.getElementById("emailCheck");
+        
+        if(emailPattern.test(email.value)) {
+          emailCheckElement.classList.remove("invalid");
+          emailCheckElement.classList.add("valid");
+          isSubmitButtonDisabled = false;
+        } else {
+          emailCheckElement.classList.remove("valid");
+          emailCheckElement.classList.add("invalid");
+          isSubmitButtonDisabled = true;
+        }
+
+        submitButton.disabled = isSubmitButtonDisabled;
+
+      }
 
       password.onkeyup = function () {
         console.log("letter typed: ", password.value);
@@ -42,6 +70,7 @@
         const lowercaseLetterPattern = /[a-z]/;
         const uppercaseLetterPattern = /[A-Z]/;
         const numbersPattern = /[0-9]/;
+        
         // const minCharactersPattern = /.{8}/;
 
         const lowercaseElement = document.getElementById("lowercase");
@@ -49,37 +78,55 @@
         const numberElement = document.getElementById("number");
         const minCharsElement = document.getElementById("minChars");
 
+        let isLowercaseLetterPatternValid = false;
+        let isUppercaseLetterPatternValid = false;
+        let isNumbersPatternValid = false;
+        let isPasswordLengthPatternValid = false;
+
         if (lowercaseLetterPattern.test(password.value)) {
           lowercaseElement.classList.remove("invalid");
           lowercaseElement.classList.add("valid");
+          isLowercaseLetterPatternValid = true;
         } else {
           lowercaseElement.classList.remove("valid");
           lowercaseElement.classList.add("invalid");
+          isLowercaseLetterPatternValid = false;
         }
 
         if (uppercaseLetterPattern.test(password.value)) {
           uppercaseElement.classList.remove("invalid");
           uppercaseElement.classList.add("valid");
+          isUppercaseLetterPatternValid = true;
         } else {
           uppercaseElement.classList.remove("valid");
           uppercaseElement.classList.add("invalid");
+          isUppercaseLetterPatternValid = false;
         }
 
         if (numbersPattern.test(password.value)) {
           numberElement.classList.remove("invalid");
           numberElement.classList.add("valid");
+          isNumbersPatternValid = true;
         } else {
           numberElement.classList.remove("valid");
           numberElement.classList.add("invalid");
+          isNumbersPatternValid = false;
         }
 
         if (password.value.length >= 8) {
           minCharsElement.classList.remove("invalid");
           minCharsElement.classList.add("valid");
+          isPasswordLengthPatternValid = true;
         } else {
           minCharsElement.classList.add("invalid");
           minCharsElement.classList.remove("valid");
+          isPasswordLengthPatternValid = false;
         }
+
+        submitButton.disabled = !(isLowercaseLetterPatternValid 
+              && isUppercaseLetterPatternValid 
+              && isNumbersPatternValid 
+              && isPasswordLengthPatternValid);
       };
     </script>
   </body>

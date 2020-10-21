@@ -10,7 +10,13 @@ To install the project use the command `npm install`.
 
 To run the project use the command `npm run server:start`.
 
-## HomeWork
+## HomeWork #2
+
+- create new field: Credit Card Number
+- implement validation also for credit Credit Card Number
+- submit button should be enable when all three fields are valid
+
+## HomeWork #1
 
 - install npm, if you did not
 - install VSCode, if you did not
